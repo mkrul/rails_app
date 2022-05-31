@@ -1,0 +1,12 @@
+
+<div class="headline border-gray">
+  <h1><%= @forum_thread.subject %></h1>
+</div>
+
+<p>
+  <%= @forum_thread.forum_posts.each do |post| %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_forum_thread_path(@forum_thread) %> |
+<%= link_to 'Back', forum_threads_path %>

@@ -1,0 +1,19 @@
+
+<h1>Forum Threads</h1>
+
+<table>
+  <tbody>
+    <% unless @forum_threads.present? %>
+      No threads were found.
+    <% end %>
+    <% @forum_threads.each do |thread| %>
+      <tr>
+        <td><%= link_to thread.subject, thread, class: "text-decoration-none headline" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Thread', new_forum_thread_path %>
