@@ -29,7 +29,19 @@
   </tbody>
 </table>
 
-
-<br>
+<br />
 
 <%= link_to 'New Book', new_book_path %>
+
+<br /><br />
+
+<% if @books %>
+  <div>
+    <%= form_tag bulk_destroy_books_path, method: :delete do %>
+      <div class="form-group">
+        <%= submit_tag 'Delete All Books', class: 'btn btn-sm btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+

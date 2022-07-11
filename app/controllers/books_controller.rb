@@ -1,9 +1,11 @@
+require 'byebug'
+require 'csv'
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show edit update destroy ]
+  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_books, only: [:index, :bulk_upload, :bulk_destroy]
 
   # GET /books or /books.json
   def index
-    @books = Book.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /books/1 or /books/1.json
@@ -57,14 +59,36 @@ class BooksController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.friendly.find(params[:id])
+  def bulk_upload
+    uploaded_file = params[:book][:file]
+    File.open(Rails.root.join('public', 'uploads', 'books.csv'), 'wb') do |file|
+      file.write(uploaded_file.read)
+      BulkUploadBooks.perform_async(file.path)
     end
 
-    # Only allow a list of trusted parameters through.
-    def book_params
-      params.require(:book).permit(:title, :description)
-    end
+    redirect_to books_path
+  end
+
+  def bulk_destroy
+    BulkDestroyBooks.perform_async
+
+    redirect_to books_path
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_book
+    @book = Book.friendly.find(params[:id])
+  end
+
+  def set_books
+    @books = Book.paginate(page: params[:page], per_page: 5)
+  end
+
+  # Only allow a list of trusted parameters through.
+  def book_params
+    params.require(:book).permit(:title, :description)
+  end
+
 end

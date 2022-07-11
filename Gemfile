@@ -33,10 +33,12 @@ gem 'jquery-rails', '~> 4.1'
 gem 'friendly_id', '~> 5.1'
 gem 'will_paginate', '~> 3.3'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.2'
+gem 'sidekiq', '~> 4.1', '>= 4.1.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry', '~> 0.14.1'
 end
 
 group :development do
