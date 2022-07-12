@@ -194,6 +194,8 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (3.3.5)
+    redis-namespace (1.8.2)
+      redis (>= 3.0.4)
     regexp_parser (2.5.0)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -316,6 +318,8 @@ DEPENDENCIES
   pry (~> 0.14.1)
   puma (~> 4.1)
   rails (~> 6.0.4, >= 6.0.4.7)
+  redis (= 3.3.5)
+  redis-namespace (~> 1.8, >= 1.8.2)
   sass-rails (>= 6)
   selenium-webdriver
   sidekiq (~> 4.1, >= 4.1.2)

@@ -16,4 +16,18 @@
 class Book < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
+
+  validate :ensure_slug_uniqueness
+
+  protected
+
+  def ensure_slug_uniqueness
+    if self.slug.blank?
+      errors.add(:slug, 'cannot be blank')
+    end
+
+    unless Slug[self.slug].nil? || Slug[self.slug] == self.id.to_s
+      errors.add(:slug), 'is already taken'
+    end
+  end
 end

@@ -34,6 +34,8 @@ gem 'friendly_id', '~> 5.1'
 gem 'will_paginate', '~> 3.3'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.2'
 gem 'sidekiq', '~> 4.1', '>= 4.1.2'
+gem 'redis', '3.3.5'
+gem 'redis-namespace', '~> 1.8', '>= 1.8.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

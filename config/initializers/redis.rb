@@ -1,0 +1,1 @@
+$redis = Redis::Namespace.new('forum_app', redis: Redis.new)
